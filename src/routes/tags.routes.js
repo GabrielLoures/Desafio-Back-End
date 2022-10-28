@@ -6,14 +6,8 @@ const tagsController = new TagsController();
 
 const tagsRoutes = Router();
 
-function myMiddleware(req, res, next) {
+const ensureAuthenticated = require('../middleware/ensureAuthenticated');
 
-  console.log('Voce passou pelo Middleware')
-
-  next();
-
-}
-
-tagsRoutes.get("/:user_id", myMiddleware, tagsController.index);
+tagsRoutes.get("/", ensureAuthenticated, tagsController.index);
 
 module.exports = tagsRoutes;

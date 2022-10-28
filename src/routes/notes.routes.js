@@ -6,17 +6,13 @@ const notesController = new NotesController();
 
 const notesRoutes = Router();
 
-function myMiddleware(req, res, next) {
+const ensureAuthenticated = require('../middleware/ensureAuthenticated');
 
-  console.log('Voce passou pelo Middleware')
+notesRoutes.use(ensureAuthenticated);
 
-  next();
-
-}
-
-notesRoutes.post("/:user_id", myMiddleware, notesController.create);
-notesRoutes.get("/:id", myMiddleware, notesController.show);
-notesRoutes.delete("/:id", myMiddleware, notesController.delete);
-notesRoutes.get("/", myMiddleware, notesController.index);
+notesRoutes.post("/", notesController.create);
+notesRoutes.get("/:id", notesController.show);
+notesRoutes.delete("/:id", notesController.delete);
+notesRoutes.get("/", notesController.index);
 
 module.exports = notesRoutes;

@@ -9,13 +9,13 @@ class NotesController {
 
     const { title, description, rating, tags } = req.body;
 
-    const { user_id } = req.params;
+    const user_id = req.user.id;
 
     if(rating < 0 || rating > 5) {
       throw new AppError("A nota para o filme deve ser entre 0 e 5")
     }
 
-    const note_id = await knex("notes").inser({
+    const note_id = await knex("notes").insert({
       title,
       description,
       rating,
@@ -32,7 +32,7 @@ class NotesController {
 
     await knex("tags").insert(tagsInsert);
 
-    res.json();
+    return res.json();
     
   }
 
@@ -62,7 +62,8 @@ class NotesController {
 
   async index(req, res) {
 
-    const { title, user_id, tags } = req.query;
+    const { title, tags } = req.query;
+    const user_id = req.user.id;
 
     let notes;
 

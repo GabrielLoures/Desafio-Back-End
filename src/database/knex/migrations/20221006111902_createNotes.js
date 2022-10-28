@@ -1,5 +1,5 @@
 
-exports.up = knex => knex.schema.craeteTable("notes", table => {
+exports.up = knex => knex.schema.createTable("notes", table => {
 
   table.increments("id");
   table.text("title");
