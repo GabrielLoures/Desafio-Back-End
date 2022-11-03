@@ -12,15 +12,15 @@ const AppError = require("./utils/AppError");
 
 const routes = require("./routes");
 
+migrationRun();
+
 const app = express();
 
-migrationRun();
+app.use(cors());
 
 app.use(express.json());
 
 app.use(routes);
-
-app.use(cors());
 
 app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER))
 
