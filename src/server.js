@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(routes);
 
-app.use(cors)
+app.use(cors())
 
 app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER))
 
